@@ -2,7 +2,10 @@ import torch
 from sklearn.metrics import accuracy_score
 
 def evaluate_model(model, X, y, scaler):
-    X_scaled = scaler.transform(X)
+    if scaler is None:
+        X_scaled = X
+    else:
+        X_scaled = scaler.transform(X)
     X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
     y_tensor = torch.tensor(y, dtype=torch.float32)
     

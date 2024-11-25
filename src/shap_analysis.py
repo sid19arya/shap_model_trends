@@ -2,7 +2,10 @@ import shap
 import matplotlib.pyplot as plt
 
 def shap_analysis(model, X, scaler, feature_names, output_dir, hospital_name):
-    X_scaled = scaler.transform(X)
+    if scaler is None:
+        X_scaled = X
+    else:
+        X_scaled = scaler.transform(X)
     explainer = shap.Explainer(model, X_scaled)
     shap_values = explainer(X_scaled)
 

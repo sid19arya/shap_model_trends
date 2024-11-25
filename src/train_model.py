@@ -22,9 +22,9 @@ class SimpleNN(nn.Module):
 
 def train_model(X, y, input_size, epochs=50, lr=0.001):
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.3, random_state=42)
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_val = scaler.transform(X_val)
+    # scaler = StandardScaler()
+    # X_train = scaler.fit_transform(X_train)
+    # X_val = scaler.transform(X_val)
 
     train_dataset = TensorDataset(torch.tensor(X_train, dtype=torch.float32), torch.tensor(y_train, dtype=torch.float32))
     val_dataset = TensorDataset(torch.tensor(X_val, dtype=torch.float32), torch.tensor(y_val, dtype=torch.float32))
@@ -45,4 +45,4 @@ def train_model(X, y, input_size, epochs=50, lr=0.001):
             loss.backward()
             optimizer.step()
     
-    return model, scaler
+    return model, None
